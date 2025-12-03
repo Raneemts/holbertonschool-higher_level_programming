@@ -27,30 +27,35 @@ Test case #2: Matrix with floats and negatives
     >>> matrix_divided(m, 1.5)
     [[-1.0, 1.33], [2.0, 3.0]]
 
+Test case #3: div is +infinity float
+
+    >>> matrix_divided([[1, 2], [3, 4]], float('inf'))
+    [[0.0, 0.0], [0.0, 0.0]]
+
 
 Section // Matrix validation
 ============================
 
-Test case #3: matrix is not a list
+Test case #4: matrix is not a list
 
     >>> matrix_divided(5, 2)
     Traceback (most recent call last):
     TypeError: matrix must be a matrix (list of lists) of integers/floats
 
-Test case #4: matrix is a list but rows are not lists
+Test case #5: matrix is a list but rows are not lists
 
     >>> matrix_divided([1, 2, 3], 2)
     Traceback (most recent call last):
     TypeError: matrix must be a matrix (list of lists) of integers/floats
 
-Test case #5: matrix contains a non-number element
+Test case #6: matrix contains a non-number element
 
     >>> bad_matrix = [[1, "2"], [3, 4]]
     >>> matrix_divided(bad_matrix, 2)
     Traceback (most recent call last):
     TypeError: matrix must be a matrix (list of lists) of integers/floats
 
-Test case #6: rows of different sizes
+Test case #7: rows of different sizes
 
     >>> ragged = [[1, 2], [3]]
     >>> matrix_divided(ragged, 2)
@@ -61,14 +66,30 @@ Test case #6: rows of different sizes
 Section // Divider validation
 =============================
 
-Test case #7: div is not a number
+Test case #8: div is not a number
 
     >>> matrix_divided([[1, 2], [3, 4]], "2")
     Traceback (most recent call last):
     TypeError: div must be a number
 
-Test case #8: division by zero
+Test case #9: division by zero
 
     >>> matrix_divided([[1, 2], [3, 4]], 0)
     Traceback (most recent call last):
     ZeroDivisionError: division by zero
+
+
+Section // Missing arguments
+============================
+
+Test case #10: missing div argument
+
+    >>> matrix_divided([[1, 2], [3, 4]])
+    Traceback (most recent call last):
+    TypeError: matrix_divided() missing 1 required positional argument: 'div'
+
+Test case #11: missing both arguments
+
+    >>> matrix_divided()
+    Traceback (most recent call last):
+    TypeError: matrix_divided() missing 2 required positional arguments: 'matrix' and 'div'
