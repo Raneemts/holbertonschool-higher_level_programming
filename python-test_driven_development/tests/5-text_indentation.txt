@@ -1,0 +1,52 @@
+===============================
+4. Text indentation module
+===============================
+
+Import module:
+==============
+    >>> text_indentation = __import__('5-text_indentation').text_indentation
+
+
+Section // Basic usage
+======================
+
+Test case #0: Basic punctuation formatting
+
+    >>> text_indentation("Hello. World?")
+    Hello.
+    <BLANKLINE>
+    World?
+    <BLANKLINE>
+
+
+Test case #1: Removes spaces after punctuation
+
+    >>> text_indentation("Hello.    World:  Yes?")
+    Hello.
+    <BLANKLINE>
+    World:
+    <BLANKLINE>
+    Yes?
+    <BLANKLINE>
+
+
+Test case #2: Multiple punctuation marks in long text
+
+    >>> text_indentation("A? B. C: D")
+    A?
+    <BLANKLINE>
+    B.
+    <BLANKLINE>
+    C:
+    <BLANKLINE>
+    D
+
+
+Section // Type validation
+==========================
+
+Test case #3: Input is not a string
+
+    >>> text_indentation(123)
+    Traceback (most recent call last):
+    TypeError: text must be a string
