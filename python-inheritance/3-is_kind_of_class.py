@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Defines a function that checks if an object is an instance of or inherits from a class."""
+"""Checks if an object is an instance of or inherits from a class."""
 
 
 def is_kind_of_class(obj, a_class):
