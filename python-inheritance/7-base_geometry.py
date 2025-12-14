@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-#!/usr/bin/python3
 """Defines a BaseGeometry class with area and integer validation."""
 
 
