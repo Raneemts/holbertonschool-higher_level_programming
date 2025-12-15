@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-"""Defines shapes using abstract base classes and duck typing."""
+"""Shapes: ABC + duck typing (no extra imports)."""
 
 from abc import ABC, abstractmethod
-import math
+
+PI = 3.141592653589793
 
 
 class Shape(ABC):
@@ -23,27 +24,27 @@ class Circle(Shape):
     """Circle shape."""
 
     def __init__(self, radius):
-        self.radius = radius
+        self.__radius = radius
 
     def area(self):
-        return math.pi * (self.radius ** 2)
+        return PI * (self.__radius ** 2)
 
     def perimeter(self):
-        return 2 * math.pi * self.radius
+        return 2 * PI * self.__radius
 
 
 class Rectangle(Shape):
     """Rectangle shape."""
 
     def __init__(self, width, height):
-        self.width = width
-        self.height = height
+        self.__width = width
+        self.__height = height
 
     def area(self):
-        return self.width * self.height
+        return self.__width * self.__height
 
     def perimeter(self):
-        return 2 * (self.width + self.height)
+        return 2 * (self.__width + self.__height)
 
 
 def shape_info(shape):
