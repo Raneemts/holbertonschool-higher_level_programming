@@ -2,7 +2,8 @@
 """Shapes, interfaces, and duck typing."""
 
 from abc import ABC, abstractmethod
-import math
+
+PI = 3.141592653589793
 
 
 class Shape(ABC):
@@ -23,20 +24,20 @@ class Circle(Shape):
     """Circle shape."""
 
     def __init__(self, radius):
-        self.radius = radius   # MUST be public
+        self.radius = radius
 
     def area(self):
-        return math.pi * (self.radius ** 2)
+        return PI * (self.radius ** 2)
 
     def perimeter(self):
-        return 2 * math.pi * self.radius
+        return 2 * PI * self.radius
 
 
 class Rectangle(Shape):
     """Rectangle shape."""
 
     def __init__(self, width, height):
-        self.width = width     # MUST be public
+        self.width = width
         self.height = height
 
     def area(self):
@@ -48,5 +49,5 @@ class Rectangle(Shape):
 
 def shape_info(shape):
     """Print area and perimeter using duck typing."""
-    print("Area:", shape.area())
-    print("Perimeter:", shape.perimeter())
+    print(f"Area: {shape.area()}")
+    print(f"Perimeter: {shape.perimeter()}")
