@@ -1,19 +1,22 @@
 #!/usr/bin/env python3
-"""Defines shapes using duck typing."""
+"""Defines shapes using abstract base classes and duck typing."""
 
+from abc import ABC, abstractmethod
 import math
 
 
-class Shape:
-    """Base class for shapes."""
+class Shape(ABC):
+    """Abstract base class for shapes."""
 
+    @abstractmethod
     def area(self):
-        """Return the area."""
-        raise NotImplementedError
+        """Return the area of the shape."""
+        pass
 
+    @abstractmethod
     def perimeter(self):
-        """Return the perimeter."""
-        raise NotImplementedError
+        """Return the perimeter of the shape."""
+        pass
 
 
 class Circle(Shape):
