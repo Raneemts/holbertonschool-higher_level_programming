@@ -1,48 +1,45 @@
 #!/usr/bin/python3
-"""Python web server"""
-import http.server
-import socketserver
+"""
+Simple API using http.server
+"""
 import json
+from http.server import BaseHTTPRequestHandler, HTTPServer
 
 
-PORT = 8000
-class MyHandler(http.server.BaseHTTPRequestHandler):
+class SimpleAPIHandler(BaseHTTPRequestHandler):
+    def _send_text(self, status_code, text):
+        body = text.encode("utf-8")
+        self.send_response(status_code)
+        self.send_header("Content-Type", "text/plain; charset=utf-8")
+        self.send_header("Content-Length", str(len(body)))
+        self.end_headers()
+        self.wfile.write(body)
+
+    def _send_json(self, status_code, payload):
+        body = json.dumps(payload).encode("utf-8")
+        self.send_response(status_code)
+        self.send_header("Content-Type", "application/json")
+        self.send_header("Content-Length", str(len(body)))
+        self.end_headers()
+        self.wfile.write(body)
+
     def do_GET(self):
         if self.path == "/":
-            self.send_response(200)
-            self.send_header("Content-type", "text/plain")
-            self.end_headers()
-            self.wfile.write(b"Hello, this is a simple API!")
-
+            self._send_text(200, "Hello, this is a simple API!")
         elif self.path == "/data":
-            self.send_response(200)
-            self.send_header("Content-type", "application/json")
-            self.end_headers()
-            response_data = {
-                "name": "John",
-                "age": 30,
-                "city": "New York"
-            }
-            self.wfile.write(json.dumps(response_data).encode('utf-8'))
+            self._send_json(200, {"name": "John", "age": 30, "city": "New York"})
         elif self.path == "/status":
-            self.send_response(200)
-            self.send_header("Content-type", "text/plain")
-            self.end_headers()
-            """response_data = {
-                "status": "OK"
-            }"""
-            self.wfile.write(b"OK")
+            self._send_text(200, "OK")
         else:
-            self.send_response(404)
-            self.send_header("Content-type", "text/plain")
-            self.end_headers()
-            """response_data = {
-                "error": "Endpoint not found"
-            }"""
-            self.wfile.write(b"404 Not Found")
+            # IMPORTANT: exact message expected by the tests
+            self._send_text(404, "Endpoint not found")
 
-Handler = MyHandler
 
-with socketserver.TCPServer(("", PORT), Handler) as httpd:
-    print(f"Serving at port {PORT}")
+def run(server_class=HTTPServer, handler_class=SimpleAPIHandler, port=8000):
+    server_address = ("", port)
+    httpd = server_class(server_address, handler_class)
     httpd.serve_forever()
+
+
+if __name__ == "__main__":
+    run()
