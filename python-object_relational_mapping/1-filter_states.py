@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-Lists all states with a name starting with 'N'
+Lists all cities of a given state (safe from SQL injection)
 """
 
 import MySQLdb
@@ -17,14 +17,19 @@ if __name__ == "__main__":
     )
 
     cursor = db.cursor()
-    cursor.execute(
-        "SELECT * FROM states WHERE name LIKE 'N%' ORDER BY id ASC"
-    )
+
+    query = """
+        SELECT cities.name
+        FROM cities
+        JOIN states ON cities.state_id = states.id
+        WHERE states.name = %s
+        ORDER BY cities.id ASC
+    """
+    cursor.execute(query, (sys.argv[4],))
 
     rows = cursor.fetchall()
     for row in rows:
-        print(row)
+        print(row[0])
 
     cursor.close()
     db.close()
-
