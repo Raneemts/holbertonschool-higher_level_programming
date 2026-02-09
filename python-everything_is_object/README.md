@@ -1,11 +1,42 @@
 # Python - Everything is object
 
+## Introduction
 In this project, I studied object instantiation in Python, delving into
 variable aliasing and object identifiers, types, and mutability. The project
 involved a series of quiz-like questions the answers to which I provided in
 single-line `.txt` files.
 
+## id and type
+Every object in Python has an identity and a type. The `id()` function returns a unique identifier for an object during its lifetime, while the `type()` function indicates the object’s data type.
 
+## Mutable objects
+Mutable objects can be modified after creation without changing their identity. Common mutable types include lists, dictionaries, and sets.
+
+## Immutable objects
+Immutable objects cannot be modified once created. Examples include integers, floats, strings, and tuples.
+
+## Why it matters and how Python treats them differently
+Understanding the difference between mutable and immutable objects is essential to avoid unexpected behavior. Mutable objects are passed and modified by reference, while immutable objects result in new object creation when altered. This distinction impacts assignment, copying, and debugging.
+
+## How arguments are passed to functions
+Python passes arguments as object references. Functions receive references to the same objects, not copies.
+
+## Mutable example
+```
+>>> def add_item(lst):
+>>> lst.append(4)
+>>> my_list = [1, 2, 3]
+>>> add_item(my_list)
+>>> print(my_list)
+```
+## Immutable example
+```
+>>> def increment(n):
+>>> lst.append(4)
+>>> my_list = [1, 2, 3]
+>>> add_item(my_list)
+>>> print(my_list)
+```
 ## Tasks :page_with_curl:
 
 * **0. Who am I?**
