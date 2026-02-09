@@ -23,19 +23,23 @@ Python passes arguments as object references. Functions receive references to th
 
 ## Mutable example
 ```
->>> def add_item(lst):
->>> lst.append(4)
->>> my_list = [1, 2, 3]
->>> add_item(my_list)
->>> print(my_list)
+def add_item(lst):
+    lst.append(4)
+
+my_list = [1, 2, 3]
+add_item(my_list)
+print(my_list)
+
 ```
 ## Immutable example
 ```
->>> def increment(n):
->>> lst.append(4)
->>> my_list = [1, 2, 3]
->>> add_item(my_list)
->>> print(my_list)
+def increment(n):
+    n += 1
+
+x = 5
+increment(x)
+print(x)
+
 ```
 ## Tasks :page_with_curl:
 
